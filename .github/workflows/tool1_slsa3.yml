@@ -55,8 +55,11 @@ jobs:
     steps:
       - name: Generate the token
         id: generate
+        env:
+          INPUTS: ${{ toJson(inputs) }}
         run: |
           # TODO: call the Action
+          echo "inputs: $INPUTS"
           echo "slsa-token=!!the slsa token!!" >> "$GITHUB_OUTPUT"
         #   with:
         #  audience: "builder_delegated_slsa3"
