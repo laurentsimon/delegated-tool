@@ -49,7 +49,7 @@ on:
 jobs:
   slsa-setup:
     outputs:
-      slsa-token: ${{ steps.validate.outputs.slsa-token }}
+      slsa-token: ${{ steps.generate.outputs.slsa-token }}
     runs-on: ubuntu-latest
     steps:
       - name: Generate the token
@@ -59,7 +59,7 @@ jobs:
         run: |
           # TODO: call the Action
           echo "inputs: $INPUTS"
-          echo "slsa-token=!!the slsa token!!" >> "$GITHUB_OUTPUT"
+          echo "slsa-token=slsa-token-base64" >> "$GITHUB_OUTPUT"
         #   with:
         #  audience: "builder_delegated_slsa3"
         #  private-repository: ${{ inputs.private-repository }}
