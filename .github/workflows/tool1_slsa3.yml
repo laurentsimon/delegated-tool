@@ -1,0 +1,93 @@
+# Copyright 2022 SLSA Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Tool 1 secure builder
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  workflow_call:
+    secrets:
+      password:
+        description: "passsword"
+        required: false
+        default: ""
+    inputs:
+      name1:
+        description: "name 1"
+        required: true
+        type: string
+      name2:
+        description: "name 2"
+        required: true
+        type: string
+      private-repository:
+        description: "private"
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      artifacts:
+        description: "artifacts metadata"
+        value: ${{ jobs.slsa-run.outputs.build-artifacts-outputs }}
+
+jobs:
+  slsa-setup:
+    outputs:
+      slsa-token: ${{ steps.validate.outputs.slsa-token }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate the token
+        id: generate
+        run: |
+          # TODO: call the Action
+          echo "slsa-token=!!the slsa token!!" >> "$GITHUB_OUTPUT"
+        #   with:
+        #  audience: "builder_delegated_slsa3"
+        #  private-repository: ${{ inputs.private-repository }}
+        #  runner-label: "ubuntu-latest"
+        #  builder-action-path": "./github/workflows/builder_slsa3/build-artifacts"
+
+  slsa-run:
+    needs: [slsa-setup]
+    permissions:
+      id-token: write # For signing.
+      contents: write # For asset uploads.
+      actions: read   # For the entrypoint.
+    uses: laurentsimon/slsa-delegator/.github/workflows/delegator_generic_slsa3.yml@main
+    with:
+      slsa-token: ${{ needs.slsa-setup.outputs.slsa-token }}
+      secrets: "secret1 secret2"
+
+  slsa-publish:
+    needs: [slsa-run]
+    permissions:
+      contents: write # For asset uploads. Optional
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify and publish
+        env:
+          DOWNLOAD_NAME: ${{ needs.slsa-run.outputs.attestations-download-name }}
+          ARTIFACTS: ${{ toJson(needs.slsa-run.outputs.build-artifacts-outputs) }}
+        run: |
+          echo "download from $DOWNLOAD_NAME"
+          echo "artifacts $ARTIFACTS"
+
+          # Download artifacts and provenance
+          # Verify thru slsa-verifier
