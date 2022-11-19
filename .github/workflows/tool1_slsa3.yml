@@ -27,7 +27,6 @@ on:
       password:
         description: "passsword"
         required: false
-        default: ""
     inputs:
       name1:
         description: "name 1"
