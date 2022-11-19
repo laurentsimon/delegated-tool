@@ -75,6 +75,7 @@ jobs:
     uses: laurentsimon/slsa-delegator/.github/workflows/delegator_generic_slsa3.yml@main
     with:
       slsa-token: ${{ needs.slsa-setup.outputs.slsa-token }}
+    secrets:
       secrets: "secret1 secret2"
 
   slsa-publish:
