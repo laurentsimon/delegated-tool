@@ -41,6 +41,11 @@ on:
         required: false
         type: boolean
         default: false
+      release-tag: #test
+        decription: "tag collision with dispatch event"
+        required: false
+        type: string
+        default: "v100"
     outputs:
       artifacts:
         description: "artifacts metadata"
