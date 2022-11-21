@@ -33,6 +33,6 @@ jobs:
         run: |
           echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE/__PROJECT_CHECKOUT_DIR__" >> $GITHUB_ENV
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-      - uses: ./__ACTION_DIR__/build-artifacts-composite
+      - uses: ./actions/build-artifacts-composite
         env:
           SLSA_SECRETS: some-secrets
