@@ -33,6 +33,8 @@ runs:
         ls
         pwd
         tree
+        echo "git status:"
+        git status --short
 
     - name: "run"
       id: generate-outputs
