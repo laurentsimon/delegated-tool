@@ -29,13 +29,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: __TOOL_CHECKOUT_DIR__
       - shell: bash
         run: |
           echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE/__PROJECT_CHECKOUT_DIR__" >> $GITHUB_ENV
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
 
           mkdir -p some/actions/
-          mv ./actions/build-artifacts-composite/* some/actions/
+          mv ./__TOOL_CHECKOUT_DIR__/actions/build-artifacts-composite/* some/actions/
       - uses: ./some/actions
         env:
           SLSA_SECRETS: some-secrets
