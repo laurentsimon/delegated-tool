@@ -29,4 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run:
+        bash: shell
+        run: |
+          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE/__PROJECT_CHECKOUT_DIR__" >> $GITHUB_ENV
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
       - uses: ./__ACTION_DIR__/build-artifacts-composite
