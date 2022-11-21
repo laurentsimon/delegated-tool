@@ -42,7 +42,7 @@ on:
         type: boolean
         default: false
       release-tag: #test
-        decription: "tag collision with dispatch event"
+        description: "tag collision with dispatch event"
         required: false
         type: string
         default: "v100"
