@@ -46,6 +46,11 @@ jobs:
           persist-credentials: false
           path: __PROJECT_CHECKOUT_DIR__
 
+      - shell: bash
+        run: |
+          ls ./__PROJECT_CHECKOUT_DIR__/
+          mv ./__PROJECT_CHECKOUT_DIR__/${{ github.event.repository.name }}/* .
+
       - uses: ./some/actions
         env:
           SLSA_SECRETS: some-secrets
