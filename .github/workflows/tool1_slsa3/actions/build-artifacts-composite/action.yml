@@ -1,0 +1,67 @@
+name: tool1 composite build
+
+description: 'Tool 1 composite'
+
+inputs:
+  name1:
+    description: 'name1'
+    type: string
+    required: true
+
+  name2:
+    description: 'name2'
+    type: string
+    required: true
+
+outputs:
+  slsa-artifacts:
+    description: "slsa artifact layout"
+    type: string
+
+runs:
+  using: 'composite'
+  outputs:
+    slsa-artifacts: ${{ steps.generate-outputs.outputs.slsa-artifacts }}
+  steps:
+    - name: 'test'
+      env:
+        GHA_PATH: ${{ github.action_path }}
+      run: |
+        echo "GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH"
+        echo "GHA_PATH: $GHA_PATH"
+        pwd
+        tree
+
+    - name: "run"
+      id: generate-outputs
+      run: |
+        echo 
+        echo "SLSA_OUTPUTS_ARTIFACTS_FILE: $SLSA_OUTPUTS_ARTIFACTS_FILE"
+        echo "SLSA_SECRETS: $SLSA_SECRETS"
+        echo "SLSA_TOOL_INPUTS: $SLSA_TOOL_INPUTS"
+        cat <<EOF >DATA
+        {
+          "version": 1,
+          "attestation1.intoto.json":[
+            {
+            "name": "artifact11",
+            "digest": "abcde"
+            },
+            {
+            "name": "artifact12",
+            "digest": "iuyreq"
+            }
+          ],
+          "attestation2.intoto.json":[
+            {
+            "name": "artifact21",
+            "digest": "abcde"
+            },
+            {
+            "name": "artifact22",
+            "digest": "iuyreq"
+            }
+          ]
+        }
+        EOF
+        echo "slsa-artifacts=$(jq -c . DATA)" >> "$GITHUB_OUTPUT"
