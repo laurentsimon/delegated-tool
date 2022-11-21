@@ -28,4 +28,5 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: laurentsimon/slsa-delegated-tool/.github/actions/tool1_slsa/actions/build-artifacts-composite@main
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/tool1_slsa/actions/build-artifacts-composite@main
