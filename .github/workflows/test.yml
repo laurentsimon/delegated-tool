@@ -49,7 +49,8 @@ jobs:
       - shell: bash
         run: |
           ls ./__PROJECT_CHECKOUT_DIR__/
-          mv ./__PROJECT_CHECKOUT_DIR__/${{ github.event.repository.name }}/* .
+          mkdir ${{ github.event.repository.name }}
+          mv ./__PROJECT_CHECKOUT_DIR__/* ./${{ github.event.repository.name }}/
 
       - uses: ./some/actions
         env:
