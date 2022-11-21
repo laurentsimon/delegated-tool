@@ -22,7 +22,7 @@ defaults:
     shell: bash
 
 on:
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
   run:
