@@ -29,6 +29,9 @@ runs:
       run: |
         echo "GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH"
         echo "GHA_PATH: $GHA_PATH"
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        ls "$GITHUB_WORKSPACE"
+        ls
         pwd
         tree
 
