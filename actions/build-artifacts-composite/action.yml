@@ -88,4 +88,5 @@ runs:
           ]
         }
         EOF
+        #TODO: output in file and base64 -w0
         echo "slsa-artifacts=$(jq -c . DATA)" >> "$GITHUB_OUTPUT"
