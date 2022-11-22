@@ -43,6 +43,9 @@ runs:
 
     - name: run goreleaser
       uses: goreleaser/goreleaser-action@v3
+      with:
+        args: release --rm-dist
+
       #uses: ./../__TOOL_CHECKOUT_DIR__
 
     - name: after goreleaser
