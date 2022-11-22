@@ -37,7 +37,7 @@ jobs:
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
 
           mkdir -p ../some/actions/
-          mv ../__TOOL_CHECKOUT_DIR__/ ../some/tool/
+          mv ./__TOOL_CHECKOUT_DIR__/ ../some/tool/
           mv ../some/tool/* ../some/actions/
 
       - name: Checkout the project repository
