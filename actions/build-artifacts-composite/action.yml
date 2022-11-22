@@ -39,6 +39,9 @@ runs:
       uses: goreleaser/goreleaser-action@v3
       #uses: ./../__TOOL_CHECKOUT_DIR__
 
+    - name: after goreleaser
+      run: echo done!
+
     - name: "run"
       id: generate-outputs
       shell: bash
