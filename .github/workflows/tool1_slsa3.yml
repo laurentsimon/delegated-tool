@@ -64,7 +64,32 @@ jobs:
         run: |
           # TODO: call the Action
           echo "inputs: $INPUTS"
-          echo "slsa-token=slsa-token-base64" >> "$GITHUB_OUTPUT"
+          cat <<EOF >DATA
+          {
+            "version": 1,
+            "builder":{
+              "private-repository": false,
+              "runner-label": "ubuntu-latest"
+            },
+            "tool":{
+              "actions": {
+                "build-artifacts":{
+                  "path": "actions/build-artifacts-composite"
+                  }
+              },
+              "reusable-workflow":{
+                "path": ".github/workflows/tool1_slsa3.yml",
+                "repository": "laurentsimon/slsa-delegated-tool",
+                "ref": "main"
+              },
+              "inputs":{
+                "name1": "value1",
+                "name2": "value2"
+              }
+            }
+          }
+          EOF
+          echo "slsa-token=$(jq -c . DATA)" >> "$GITHUB_OUTPUT"
         #   with:
         #  audience: "builder_delegated_slsa3"
         #  private-repository: ${{ inputs.private-repository }}

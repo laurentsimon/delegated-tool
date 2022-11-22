@@ -3,13 +3,8 @@ name: tool1 composite build
 description: 'Tool 1 composite'
 
 inputs:
-  name1:
-    description: 'name1'
-    type: string
-    required: true
-
-  name2:
-    description: 'name2'
+  inputs:
+    description: 'All the onputs'
     type: string
     required: true
 
@@ -35,6 +30,14 @@ runs:
         tree
         echo "git status:"
         git status --short
+
+    # This would call the main Action.
+    - name: Run main action
+      uses: ./../__TOOL_CHECKOUT_DIR__
+
+    - name: run goreleaser
+      uses: goreleaser/goreleaser-action@v3
+      #uses: ./../__TOOL_CHECKOUT_DIR__
 
     - name: "run"
       id: generate-outputs
