@@ -49,6 +49,7 @@ runs:
       #uses: ./../__TOOL_CHECKOUT_DIR__
 
     - name: after goreleaser
+      shell: bash
       run: echo done!
 
     - name: "run"
