@@ -89,7 +89,7 @@ jobs:
             }
           }
           EOF
-          echo "slsa-token=$(jq -c . DATA)" >> "$GITHUB_OUTPUT"
+          echo "slsa-token=$(cat DATA | base64 -w0)" >> "$GITHUB_OUTPUT"
         #   with:
         #  audience: "builder_delegated_slsa3"
         #  private-repository: ${{ inputs.private-repository }}
