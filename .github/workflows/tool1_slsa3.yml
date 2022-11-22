@@ -62,7 +62,7 @@ jobs:
         env:
           INPUTS: ${{ toJson(inputs) }}
         run: |
-          # TODO: call the Action
+          # TODO: call the Action to generate and sign the token.
           echo "inputs: $INPUTS"
           cat <<EOF >DATA
           {
