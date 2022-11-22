@@ -1,0 +1,27 @@
+name: tool1 main action
+
+description: 'Tool 1 main action'
+
+inputs:
+  name1:
+    description: 'name1'
+    type: string
+    required: true
+
+  name2:
+    description: 'name2'
+    type: string
+    required: true
+
+outputs:
+  slsa-artifacts:
+    description: "slsa artifact layout"
+    value: ${{ steps.generate-outputs.outputs.slsa-artifacts }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'test'
+      shell: bash
+      run: |
+        echo "!! main Action !!"
