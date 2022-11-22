@@ -30,6 +30,8 @@ runs:
         tree
         echo "git status:"
         git status --short
+        echo "inputs.name1: ${{ fromJson(inputs.inputs).name1 }}"
+        echo "inputs.name2: ${{ fromJson(inputs.inputs).name2 }}"
 
     # This would call the main Action.
     - name: Run main action
