@@ -30,14 +30,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          path: ../__TOOL_CHECKOUT_DIR__
+          path: __TOOL_CHECKOUT_DIR__
       - shell: bash
         run: |
           echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE/__PROJECT_CHECKOUT_DIR__" >> $GITHUB_ENV
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
 
-          #mkdir -p some/actions/
-          mv ../__TOOL_CHECKOUT_DIR__/actions/build-artifacts-composite/* ../some/actions/
+          mkdir -p ../some/actions/
+          mv ../__TOOL_CHECKOUT_DIR__/ ../some/tool/
+          mv ../some/tool/* ../some/actions/
 
       - name: Checkout the project repository
         uses: actions/checkout@v3
