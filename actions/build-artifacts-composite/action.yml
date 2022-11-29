@@ -3,7 +3,7 @@ name: tool1 composite build
 description: 'Tool 1 composite'
 
 inputs:
-  inputs:
+  workflow-inputs:
     description: 'All the onputs'
     type: string
     required: true
@@ -30,9 +30,9 @@ runs:
         tree
         echo "git status:"
         git status --short
-        echo "inputs: ${{ toJson(inputs.inputs) }}"
-        echo "inputs.name1: ${{ fromJson(inputs.inputs).name1 }}"
-        echo "inputs.name2: ${{ fromJson(inputs.inputs).name2 }}"
+        echo "inputs: ${{ toJson(inputs.workflow-inputs) }}"
+        echo "inputs.name1: ${{ fromJson(inputs.workflow-inputs).name1 }}"
+        echo "inputs.name2: ${{ fromJson(inputs.workflow-inputs).name2 }}"
 
     # This would call the main Action.
     - name: Run main action
