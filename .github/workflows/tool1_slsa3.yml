@@ -65,7 +65,7 @@ jobs:
           slsa-private-repository: true
           slsa-runner-label: "ubuntu-latest"
           slsa-build-artifacts-action-path: "./actions/build-artifacts-composite"
-          slsa-workflow-inputs: ${{ toJson(inputs) }}
+          slsa-workflow-inputs: ${{ inputs }}
 
         # env:
         #   INPUTS: ${{ toJson(inputs) }}
