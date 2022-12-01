@@ -63,7 +63,7 @@ jobs:
         id: generate
         uses: laurentsimon/slsa-delegator/actions/setup-token@main
         with:
-          slsa-workflow-recipient: "delegated_generic_slsa3.yml"
+          slsa-workflow-recipient: "delegator_generic_slsa3.yml"
           slsa-private-repository: true
           slsa-runner-label: "ubuntu-latest"
           slsa-build-artifacts-action-path: "./actions/build-artifacts-composite"
