@@ -53,6 +53,8 @@ on:
 
 jobs:
   slsa-setup:
+    permissions:
+      id-token: write # For token creation.
     outputs:
       slsa-token: ${{ steps.generate.outputs.slsa-token }}
     runs-on: ubuntu-latest
