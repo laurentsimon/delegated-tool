@@ -11,7 +11,7 @@ inputs:
 outputs:
   some-output:
     description: "some output"
-    value: ${{ steps.generate-outputs.outputs.some-outputs }}
+    value: ${{ steps.generate-outputs.outputs.some-output }}
   other-output:
     description: "other output"
     value: ${{ steps.generate-outputs.outputs.other-output }}
