@@ -47,10 +47,11 @@ runs:
         go-version: 1.19 # argument to the Action.
         check-latest: true
 
-    - name: run goreleaser
-      uses: goreleaser/goreleaser-action@v3
-      with:
-        args: release --rm-dist
+    # Disabled to speed up testing.
+    # - name: run goreleaser
+    #   uses: goreleaser/goreleaser-action@v3
+    #   with:
+    #     args: release --rm-dist
 
       #uses: ./../__TOOL_CHECKOUT_DIR__
 
