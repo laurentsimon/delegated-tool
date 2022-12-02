@@ -9,9 +9,12 @@ inputs:
     required: true
 
 outputs:
-  slsa-artifacts:
-    description: "slsa artifact layout"
-    value: ${{ steps.generate-outputs.outputs.slsa-artifacts }}
+  some-output:
+    description: "some output"
+    value: ${{ steps.generate-outputs.outputs.some-outputs }}
+  other-output:
+    description: "other output"
+    value: ${{ steps.generate-outputs.outputs.other-output }}
 
 runs:
   using: 'composite'
@@ -89,4 +92,8 @@ runs:
         }
         EOF
         #TODO: output in file and base64 -w0
-        echo "slsa-artifacts=$(jq -c . DATA)" >> "$GITHUB_OUTPUT"
+        echo "some-output=tool-defined-some-output" >> "$GITHUB_OUTPUT"
+        echo "other-output=tool-defined-other-output" >> "$GITHUB_OUTPUT"
+
+        # Expected file with pre-defined output
+        cat DATA > "$SLSA_OUTPUTS_ARTIFACTS_FILE"
