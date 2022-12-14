@@ -77,13 +77,13 @@ runs:
         cat <<EOF >DATA
         {
           "version": 1,
-          "attestation1.intoto.json":[
+          "attestation1.intoto":[
             { "name": "artifact11",
               "digest": { "sha256": "ad91970864102a59765e20ce16216efc9d6ad381471f7accceceab7d905703ef" }},
             { "name": "artifact12",
               "digest": { "sha256": "d4d5899a3868fbb6ae1856c3e55a32ce35913de3956d1973caccd37bd0174fa2" }}
           ],
-          "attestation2.intoto.json":[
+          "attestation2.intoto":[
             { "name": "artifact21",
               "digest": { "sha256": "0ded0808c4d85f2ee0db86980ae610cc9d165e9ca9da466196cc73c346513713" }},
             { "name": "artifact22",
