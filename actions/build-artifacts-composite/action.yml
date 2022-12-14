@@ -62,7 +62,16 @@ runs:
 
     - name: after goreleaser
       shell: bash
-      run: echo done!
+      run: |
+        echo done!
+        echo "hello, world" > result.txt
+
+    - name: Upload result
+      id: upload
+      uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # tag=v3.1.1
+      with:
+        name: "result.txt"
+        path: "result.txt"
 
     - name: "run"
       id: generate-outputs
@@ -70,6 +79,7 @@ runs:
         SLSA_OUTPUTS_ARTIFACTS_FILE: ${{ inputs.slsa-outputs-file }}
       shell: bash
       run: |
+        hash=$(sha256sum result.txt | awk '{print $1}')
         echo 
         echo "SLSA_OUTPUTS_ARTIFACTS_FILE: $SLSA_OUTPUTS_ARTIFACTS_FILE"
         echo "SLSA_SECRETS: $SLSA_SECRETS"
@@ -78,8 +88,8 @@ runs:
         {
           "version": 1,
           "attestation1.intoto":[
-            { "name": "artifact11",
-              "digest": { "sha256": "ad91970864102a59765e20ce16216efc9d6ad381471f7accceceab7d905703ef" }},
+            { "name": "result.txt",
+              "digest": { "sha256": "$hash" }},
             { "name": "artifact12",
               "digest": { "sha256": "d4d5899a3868fbb6ae1856c3e55a32ce35913de3956d1973caccd37bd0174fa2" }}
           ],
