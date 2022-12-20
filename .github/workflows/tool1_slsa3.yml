@@ -69,7 +69,6 @@ jobs:
           slsa-build-action-path: "./actions/build-artifacts-composite"
           slsa-workflow-inputs: ${{ toJson(inputs) }}
 
-
         # env:
         #   INPUTS: ${{ toJson(inputs) }}
         # run: |
