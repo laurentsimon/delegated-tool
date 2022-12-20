@@ -66,7 +66,7 @@ jobs:
           slsa-workflow-recipient: "delegator_generic_slsa3.yml"
           slsa-private-repository: true
           slsa-runner-label: "ubuntu-latest"
-          slsa-build-artifacts-action-path: "./actions/build-artifacts-composite"
+          slsa-build-action-path: "./actions/build-artifacts-composite"
           slsa-workflow-inputs: ${{ toJson(inputs) }}
 
         # env:
