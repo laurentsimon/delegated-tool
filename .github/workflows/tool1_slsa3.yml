@@ -71,7 +71,7 @@ jobs:
 
       - env:
           SLSA_TOKEN: ${{ steps.generate.outputs.slsa-token }}
-        run:
+        run: |
           echo "SLSA_TOKEN: $SLSA_TOKEN"
         # env:
         #   INPUTS: ${{ toJson(inputs) }}
