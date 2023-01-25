@@ -99,7 +99,8 @@ jobs:
     with:
       slsa-token: ${{ needs.slsa-setup.outputs.slsa-token }}
     secrets:
-      secrets: ${{ toJson(secrets) }}
+      secret1: ${{ secrets.secret1 }}
+      secret2: ${{ secrets.secret2 }}
 
   slsa-publish:
     needs: [slsa-run]
