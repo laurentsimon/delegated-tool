@@ -13,13 +13,13 @@ inputs:
     type: string
     required: true
 
-  secret1:
-    description: 'secret1'
+  password:
+    description: 'password'
     type: string
     required: true
 
-  secret2:
-    description: 'secret2'
+  pat-token:
+    description: 'pat-token'
     type: string
     required: true
 

@@ -73,8 +73,8 @@ runs:
       with:
         name1: ${{ fromJson(inputs.slsa-workflow-inputs).name1 }}
         name2: ${{ fromJson(inputs.slsa-workflow-inputs).name2 }}
-        secret1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
-        secret2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
+        password: ${{ inputs.slsa-workflow-secret1 }}
+        pat-token: ${{ inputs.slsa-workflow-secret2 }}
 
     # Disabled to speed up testing.
     # - name: run goreleaser
