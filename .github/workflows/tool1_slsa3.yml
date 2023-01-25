@@ -60,10 +60,10 @@ on:
       # Outputs from the Action.
       some-output:
         description: "some output"
-        value: ${{ toJson(jobs.slsa-run.outputs.build-artifacts-outputs).some-output }}
+        value: ${{ fromJson(jobs.slsa-run.outputs.build-artifacts-outputs).some-output }}
       other-output:
         description: "other output"
-        value: ${{ toJson(jobs.slsa-run.outputs.build-artifacts-outputs).other-output }}
+        value: ${{ fromJson(jobs.slsa-run.outputs.build-artifacts-outputs).other-output }}
 
       # Outputs from the BYOB framework.
       attestations-download-name:
