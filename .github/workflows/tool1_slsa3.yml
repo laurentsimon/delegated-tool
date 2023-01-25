@@ -60,10 +60,10 @@ on:
       # Outputs from the Action.
       some-output:
         description: "some output"
-        value: ${{ toJson(jobs.slsa-setup.outputs.build-artifacts-outputs).some-output }}
+        value: ${{ toJson(jobs.slsa-run.outputs.build-artifacts-outputs).some-output }}
       other-output:
         description: "other output"
-        value: ${{ toJson(jobs.slsa-setup.outputs.build-artifacts-outputs).other-output }}
+        value: ${{ toJson(jobs.slsa-run.outputs.build-artifacts-outputs).other-output }}
 
       # Outputs from the BYOB framework.
       attestations-download-name:
@@ -110,11 +110,13 @@ jobs:
     steps:
       - name: Verify and publish
         env:
-          DOWNLOAD_NAME: ${{ needs.slsa-run.outputs.attestations-download-name }}
-          ARTIFACTS: ${{ toJson(needs.slsa-run.outputs.build-artifacts-outputs) }}
+          # This is BYOB specific.
+          SLSA_ATTESTATION_DOWNLOAD_NAME: ${{ needs.slsa-run.outputs.attestations-download-name }}
+          # This is Action specific.
+          ACTION_ARTIFACTS: ${{ needs.slsa-run.outputs.build-artifacts-outputs }}
         run: |
-          echo "download from $DOWNLOAD_NAME"
-          echo "artifacts $ARTIFACTS"
+          echo "download from $SLSA_ATTESTATION_DOWNLOAD_NAME"
+          echo "artifacts $ACTION_ARTIFACTS"
 
           # Download artifacts and provenance
           # Verify thru slsa-verifier
