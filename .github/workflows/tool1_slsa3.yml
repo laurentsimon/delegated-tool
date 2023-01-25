@@ -68,7 +68,7 @@ on:
       # Outputs from the BYOB framework.
       attestations-download-name:
         description: "Name of the attestation for download"
-        value: ${{ jobs.slsa-setup.outputs.attestations-download-name }}
+        value: ${{ jobs.slsa-run.outputs.attestations-download-name }}
 
 jobs:
   slsa-setup:
