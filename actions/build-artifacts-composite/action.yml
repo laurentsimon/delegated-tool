@@ -3,12 +3,16 @@ name: tool1 composite build
 description: 'Tool 1 composite'
 
 inputs:
-  workflow-inputs:
+  slsa-workflow-inputs:
     description: 'All the onputs'
     type: string
     required: true
-  slsa-outputs-file:
-    description: 'A path to store the list of artifacts and their digest set'
+  slsa-workflow-secrets:
+    description: 'All the secrets'
+    type: string
+    required: true
+  slsa-layout-file:
+    description: 'Location to store the layout content'
     type: string
     required: true
 
@@ -27,6 +31,11 @@ runs:
       shell: bash
       env:
         GHA_PATH: ${{ github.action_path }}
+        ALL_INPUTS: ${{ toJson(inputs.workflow-inputs) }}
+        INPUT_NAME1: ${{ fromJson(inputs.workflow-inputs).name1 }}
+        INPUT_NAME2: ${{ fromJson(inputs.workflow-inputs).name2 }}
+        SECRET1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
+        SECRET2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
       run: |
         echo "GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH"
         echo "GHA_PATH: $GHA_PATH"
@@ -37,20 +46,21 @@ runs:
         tree
         echo "git status:"
         git status --short
-        echo "inputs: ${{ toJson(inputs.workflow-inputs) }}"
-        echo "inputs.name1: ${{ fromJson(inputs.workflow-inputs).name1 }}"
-        echo "inputs.name2: ${{ fromJson(inputs.workflow-inputs).name2 }}"
-
-    # This would call the main Action.
-    - name: Run main action
-      uses: ./../__TOOL_CHECKOUT_DIR__
-
+        echo "inputs: $ALL_INPUTS"
+        echo "inputs.name1: $INPUT_NAME1"
+        echo "inputs.name2: $INPUT_NAME2"
+        echo "SECRET1: $(echo $SECRET1 | base64 | base64)"
+        echo "SECRET2: $(echo $SECRET2 | base64 | base64)"
     - name: Set up Go
       uses: actions/setup-go@c4a742cab115ed795e34d4513e2cf7d472deb55f # v2.2.0
       with:
         go-version: 1.19 # argument to the Action.
         check-latest: true
 
+    # TODO: this would call the main Action, e.g., ./../__TOOL_CHECKOUT_DIR__/<path/to/action>
+    # if path is left empty, the Action's action.yml is located at the root of the repository.
+    - name: Run main action
+      uses: ./../__TOOL_CHECKOUT_DIR__
 
     # Disabled to speed up testing.
     # - name: run goreleaser
@@ -76,7 +86,7 @@ runs:
     - name: "run"
       id: generate-outputs
       env:
-        SLSA_OUTPUTS_ARTIFACTS_FILE: ${{ inputs.slsa-outputs-file }}
+        SLSA_OUTPUTS_ARTIFACTS_FILE: ${{ inputs.slsa-layout-file }}
       shell: bash
       run: |
         hash=$(sha256sum result.txt | awk '{print $1}')
@@ -102,6 +112,8 @@ runs:
         }
         EOF
         #TODO: output in file and base64 -w0
+
+        # NOTE: we relay the output from the inner Action.
         echo "some-output=tool-defined-some-output" >> "$GITHUB_OUTPUT"
         echo "other-output=tool-defined-other-output" >> "$GITHUB_OUTPUT"
 
