@@ -61,10 +61,15 @@ runs:
         go-version: 1.19 # argument to the Action.
         check-latest: true
 
-    # TODO: this would call the main Action, e.g., ./../__TOOL_CHECKOUT_DIR__/<path/to/action>
+    # This would call the main Action, e.g., ./../__TOOL_CHECKOUT_DIR__/<path/to/action>
     # if path is left empty, the Action's action.yml is located at the root of the repository.
     - name: Run main action
       uses: ./../__TOOL_CHECKOUT_DIR__
+      with:
+        name1: ${{ fromJson(inputs.slsa-workflow-inputs).name1 }}
+        name2: ${{ fromJson(inputs.slsa-workflow-inputs).name2 }}
+        secret1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
+        secret2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
 
     # Disabled to speed up testing.
     # - name: run goreleaser

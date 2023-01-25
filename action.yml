@@ -13,10 +13,15 @@ inputs:
     type: string
     required: true
 
-outputs:
-  slsa-artifacts:
-    description: "slsa artifact layout"
-    value: ${{ steps.generate-outputs.outputs.slsa-artifacts }}
+  secret1:
+    description: 'secret1'
+    type: string
+    required: true
+
+  secret2:
+    description: 'secret2'
+    type: string
+    required: true
 
 runs:
   using: 'composite'
