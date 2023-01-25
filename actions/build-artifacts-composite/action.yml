@@ -20,7 +20,7 @@ inputs:
     required: true
 
 outputs:
-  # Outputs frm the inner GitHub Action call.
+  # Outputs from the inner GitHub Action call.
   some-output:
     description: "some output"
     value: ${{ steps.generate-outputs.outputs.some-output }}
