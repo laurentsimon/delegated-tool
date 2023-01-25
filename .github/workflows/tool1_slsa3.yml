@@ -53,12 +53,17 @@ on:
 
     # These outputs mirror the output of the Action.
     outputs:
+      # Outputs from the Action.
       some-output:
         description: "some output"
         value: ${{ toJson(jobs.slsa-setup.outputs.build-artifacts-outputs).some-output }}
       other-output:
         description: "other output"
         value: ${{ toJson(jobs.slsa-setup.outputs.build-artifacts-outputs).other-output }}
+      # Outputs from the BYOB framework.
+      attestations-download-name:
+        description: "Name of the attestation for download"
+        value: ${{ jobs.slsa-setup.outputs.attestations-download-name }}
 
 jobs:
   slsa-setup:
