@@ -35,9 +35,9 @@ runs:
       shell: bash
       env:
         GHA_PATH: ${{ github.action_path }}
-        ALL_INPUTS: ${{ toJson(inputs.workflow-inputs) }}
-        INPUT_NAME1: ${{ fromJson(inputs.workflow-inputs).name1 }}
-        INPUT_NAME2: ${{ fromJson(inputs.workflow-inputs).name2 }}
+        ALL_INPUTS: ${{ toJson(inputs.slsa-workflow-inputs) }}
+        INPUT_NAME1: ${{ fromJson(inputs.slsa-workflow-inputs).name1 }}
+        INPUT_NAME2: ${{ fromJson(inputs.slsa-workflow-inputs).name2 }}
         SECRET1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
         SECRET2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
       run: |
