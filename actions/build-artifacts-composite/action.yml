@@ -101,8 +101,6 @@ runs:
         hash=$(sha256sum result.txt | awk '{print $1}')
         echo 
         echo "SLSA_OUTPUTS_ARTIFACTS_FILE: $SLSA_OUTPUTS_ARTIFACTS_FILE"
-        echo "SLSA_SECRETS: $SLSA_SECRETS"
-        echo "SLSA_TOOL_INPUTS: $SLSA_TOOL_INPUTS"
         cat <<EOF >DATA
         {
           "version": 1,
