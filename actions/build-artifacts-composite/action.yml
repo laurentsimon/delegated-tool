@@ -38,8 +38,8 @@ runs:
         ALL_INPUTS: ${{ toJson(inputs.slsa-workflow-inputs) }}
         INPUT_NAME1: ${{ fromJson(inputs.slsa-workflow-inputs).name1 }}
         INPUT_NAME2: ${{ fromJson(inputs.slsa-workflow-inputs).name2 }}
-        # SECRET1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
-        # SECRET2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
+        SECRET1: ${{ fromJson(inputs.slsa-workflow-secrets).secret1 }}
+        SECRET2: ${{ fromJson(inputs.slsa-workflow-secrets).secret2 }}
       run: |
         echo "GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH"
         echo "GHA_PATH: $GHA_PATH"
@@ -53,8 +53,8 @@ runs:
         echo "inputs: $ALL_INPUTS"
         echo "inputs.name1: $INPUT_NAME1"
         echo "inputs.name2: $INPUT_NAME2"
-        # echo "SECRET1: $(echo $SECRET1 | base64 | base64)"
-        # echo "SECRET2: $(echo $SECRET2 | base64 | base64)"
+        echo "SECRET1: $(echo $SECRET1 | base64 | base64)"
+        echo "SECRET2: $(echo $SECRET2 | base64 | base64)"
     - name: Set up Go
       uses: actions/setup-go@c4a742cab115ed795e34d4513e2cf7d472deb55f # v2.2.0
       with:

@@ -98,8 +98,8 @@ jobs:
     uses: laurentsimon/slsa-delegator/.github/workflows/delegator_generic_slsa3.yml@main
     with:
       slsa-token: ${{ needs.slsa-setup.outputs.slsa-token }}
-    # secrets:
-    #   secrets: ${{ toJson(secrets) }}
+    secrets:
+      secrets: ${{ toJson(secrets) }}
 
   slsa-publish:
     needs: [slsa-run]
