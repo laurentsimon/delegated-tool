@@ -3,10 +3,13 @@ name: tool1 composite build
 description: 'Tool 1 composite'
 
 inputs:
+  # BYOB-provided inputs
   slsa-workflow-inputs:
+    # Inputs in JSON format.
     description: 'All the onputs'
     type: string
     required: true
+  # Secrets in JSON format.
   slsa-workflow-secrets:
     description: 'All the secrets'
     type: string
@@ -17,6 +20,7 @@ inputs:
     required: true
 
 outputs:
+  # Outputs frm the inner GitHub Action call.
   some-output:
     description: "some output"
     value: ${{ steps.generate-outputs.outputs.some-output }}
