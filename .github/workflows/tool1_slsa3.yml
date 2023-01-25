@@ -51,7 +51,6 @@ on:
         type: string
         default: "v100"
 
-    # These outputs mirror the output of the Action.
     outputs:
       # Outputs from the Action.
       some-output:
@@ -60,6 +59,7 @@ on:
       other-output:
         description: "other output"
         value: ${{ toJson(jobs.slsa-setup.outputs.build-artifacts-outputs).other-output }}
+
       # Outputs from the BYOB framework.
       attestations-download-name:
         description: "Name of the attestation for download"
